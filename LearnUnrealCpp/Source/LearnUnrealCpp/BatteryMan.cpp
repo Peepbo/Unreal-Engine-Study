@@ -2,6 +2,9 @@
 
 
 #include "BatteryMan.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "GameFramework/Actor.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABatteryMan::ABatteryMan()
@@ -40,6 +43,12 @@ void ABatteryMan::BeginPlay()
 	Super::BeginPlay();
 	
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ABatteryMan::OnBeginOverlap);
+
+	if (Player_Power_Widget_Class != nullptr)
+	{
+		Player_Power_Widget = CreateWidget(GetWorld(), Player_Power_Widget_Class);
+		Player_Power_Widget->AddToViewport();
+	}
 }
 
 // Called every frame
@@ -47,6 +56,20 @@ void ABatteryMan::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	Power -= DeltaTime * Power_Treshold;
+
+	if (Power <= 0)
+	{
+		if (!bDead)
+		{
+			bDead = true;
+
+			GetMesh()->SetSimulatePhysics(true);
+
+			FTimerHandle UnusedHandle;
+			GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABatteryMan::RestartGame, 3.0f, false);
+		}
+	}
 }
 
 // Called to bind functionality to input
@@ -87,6 +110,11 @@ void ABatteryMan::MoveRight(float Axis)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		AddMovementInput(Direction, Axis);
 	}
+}
+
+void ABatteryMan::RestartGame()
+{
+	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 }
 
 void ABatteryMan::OnBeginOverlap(UPrimitiveComponent* HitComp,

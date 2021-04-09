@@ -52,6 +52,8 @@ public:
 		TSubclassOf<UUserWidget> Player_Power_Widget_Class;
 	UUserWidget* Player_Power_Widget;
 
+	void RestartGame();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
