@@ -44,10 +44,15 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 {
 	if (OtherActor->ActorHasTag("Ball"))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("TOUCH!"));
 		ABall* MyBall = Cast<ABall>(OtherActor);
 
 		FVector BallVelocity = MyBall->GetVelocity();
-		BallVelocity *= (SpeedModifierOnBounce - 1.0f);
+		//BallVelocity *= (SpeedModifierOnBounce - 1.0f);
+
+
+		BallVelocity.X *= -1;
+		BallVelocity.Y *= -1;
 
 		MyBall->GetBall()->SetPhysicsLinearVelocity(BallVelocity, true);
 
