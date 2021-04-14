@@ -9,7 +9,7 @@
 // Sets default values
 APaddle::APaddle()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	SM_Padle = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SM Padle"));
@@ -26,7 +26,18 @@ APaddle::APaddle()
 void APaddle::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	TMap<int32, FString> m;
+
+	m.Add(4, TEXT("H"));
+	m.Add(2, TEXT("E"));
+	m.Add(1, TEXT("R"));
+
+	for (auto& Elem : m)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *Elem.Value);
+	}
+
 }
 
 // Called every frame
