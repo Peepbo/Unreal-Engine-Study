@@ -6,7 +6,7 @@
 // Sets default values
 APacmanPawn::APacmanPawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -15,7 +15,8 @@ APacmanPawn::APacmanPawn()
 void APacmanPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	OnActorBeginOverlap.AddDynamic(this, &APacmanPawn::OnOverlapBegin);
 }
 
 // Called every frame
@@ -23,6 +24,10 @@ void APacmanPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!Frozen)
+	{
+		AddMovementInput(GetActorForwardVector());
+	}
 }
 
 // Called to bind functionality to input
@@ -34,6 +39,22 @@ void APacmanPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 void APacmanPawn::SetDirection(const FVector Direction)
 {
+	if (Direction == FVector::UpVector)
+	{
+		SetActorRotation(FRotator(0, 270, 0));
+	}
+	else if(Direction == FVector::DownVector)
+	{
+		SetActorRotation(FRotator(0, 90, 0));
+	}
+	else if (Direction == FVector::RightVector)
+	{
+		SetActorRotation(FRotator(0, 0, 0));
+	}
+	else if (Direction == FVector::LeftVector)
+	{
+		SetActorRotation(FRotator(0, 180, 180));
+	}
 }
 
 void APacmanPawn::OnOverlapBegin(AActor* PlayerActor, AActor* OtherActor)
