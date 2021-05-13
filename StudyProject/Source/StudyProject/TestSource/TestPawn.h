@@ -11,30 +11,17 @@ class STUDYPROJECT_API ATestPawn : public APawn
 {
 	GENERATED_BODY()
 
+private:
+	UFUNCTION(BlueprintPure)
+		int32 SumPure(int32 aValue, int32 bValue);
+
+	UFUNCTION(BlueprintCallable)
+		int32 SumCallable(int32 aValue, int32 bValue);
+
 public:
 	// Sets default values for this pawn's properties
 	ATestPawn();
 
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "ABPawnComponent")
-		class UCapsuleComponent* Body = nullptr;
-
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "ABPawnComponent")
-		class USkeletalMeshComponent* SkelMesh = nullptr;
-
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "ABPawnComponent")
-		class UArrowComponent* Arrow = nullptr;
-
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "ABPawnComponent")
-		class USpringArmComponent* SpringArm = nullptr;
-
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "ABPawnComponent")
-		class UCameraComponent* Camera = nullptr;
-
-	UPROPERTY(BlueprintReadOnly)
-		int32 BlueprintReadOnly;
-
-	UPROPERTY(BlueprintReadWrite)
-		int32 BlueprintReadWrite;
 
 protected:
 	// Called when the game starts or when spawned
@@ -46,5 +33,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 };
