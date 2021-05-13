@@ -19,6 +19,10 @@ void ATestPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	ImplementableEventVoid();
+	ImplementableEventBool();
+
+	NativeEvent();
 }
 
 // Called every frame
@@ -42,4 +46,9 @@ int32 ATestPawn::SumPure(int32 aValue, int32 bValue)
 int32 ATestPawn::SumCallable(int32 aValue, int32 bValue)
 {
 	return aValue + bValue;
+}
+
+void ATestPawn::NativeEvent_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("CPP"));
 }
