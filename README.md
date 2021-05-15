@@ -9,4 +9,4 @@ Hi Unreal
 
 05/13 # UFUNCTION MACRO
 
-05/15 # Delegate (Single Cast)
+05/15 # Delegate (Single Cast, Multi Cast)
