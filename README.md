@@ -8,3 +8,5 @@ Hi Unreal
 05/12 # UPROPERTY MACRO 
 
 05/13 # UFUNCTION MACRO
+
+05/15 # Delegate (Single Cast)
