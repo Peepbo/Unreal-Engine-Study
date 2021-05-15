@@ -16,9 +16,7 @@ void ATestPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Fuc_DeleSingle.BindLambda(this, ATestPlayer::CallDeleFunc_Single);
-	//Fuc_DeleSingle.BindUFunction(this, FName("CallDeleFunc_Single"));
-
+	Fuc_DeleSingle.BindUFunction(this, FName("CallDeleFunc_Single"));
 	Fuc_DeleSingle_OneParam.BindUFunction(this, FName("CallDeleFunc_Signle_OneParam"));
 	
 	if (Fuc_DeleSingle.IsBound()) Fuc_DeleSingle.Execute();
