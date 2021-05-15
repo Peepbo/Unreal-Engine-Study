@@ -10,6 +10,10 @@
 DECLARE_DELEGATE(FDele_Single);
 DECLARE_DELEGATE_OneParam(FDele_Single_OneParam, int32);
 
+// MultiCast
+DECLARE_MULTICAST_DELEGATE(FDele_Multi);
+DECLARE_MULTICAST_DELEGATE_OneParam(FDele_Multi_OneParam, int32);
+
 UCLASS()
 class STUDYPROJECT_API ATestPlayer : public AActor
 {
@@ -21,6 +25,9 @@ public:
 
 	FDele_Single Fuc_DeleSingle;
 	FDele_Single_OneParam Fuc_DeleSingle_OneParam;
+	
+	FDele_Multi Fuc_DeleMulti;
+	FDele_Multi_OneParam Fuc_DeleMulti_OneParam;
 
 protected:
 	// Called when the game starts or when spawned
@@ -35,8 +42,11 @@ public:
 		void CallDeleFunc_Single();
 
 	UFUNCTION()
-		void CallDeleFunc_Single2();
+		void CallDeleFunc_Signle_OneParam(int32 value);
 
 	UFUNCTION()
-		void CallDeleFunc_Signle_OneParam(int32 value);
+		void CallDeleFunc_Multi();
+
+	UFUNCTION()
+		void CallDeleFunc_Multi_OneParam(int32 value);
 };
